@@ -1,174 +1,132 @@
-# DailyRideApp
-This is a production-ready, scalable app for your car/bike pooling iOS app, based on Clean Architecture + MVVM + Feature Modules. This is something you can directly mirror in Xcode for folder structure reference as well.
+**🚗 DailyRide – Car & Bike Pooling iOS App
+**
+DailyRide is a native iOS application designed for car and bike pooling among known riders / trusted travelers. The app focuses on safe, efficient, and reliable ride sharing with a clean, scalable architecture. This project is built to demonstrate real-world iOS engineering practices, including Clean Architecture, MVVM, async/await, and modular feature-based design.
 
+**📱 Features
+**
+Authentication
+User Sign Up
+User Login
+Secure session handling
+Ride Management
+Search available rides
+Post a new ride (car/bike)
+View ride history (posted & joined rides)
+Messaging
+In-app messaging between riders and travelers
+Ride-based conversations
+User Profile
+View & edit profile
+Vehicle details
+Trusted rider information
+
+**🏗 Architecture Overview
+**
+The app follows Clean Architecture + MVVM, ensuring:
+Clear separation of concerns
+High testability
+Easy scalability
+Maintainable codebase
+
+
+Architecture Layers
+Presentation (SwiftUI + ViewModels)
+        ↓
+Domain (Entities + UseCases)
+        ↓
+Data (Repositories + APIs + DTOs)
+        ↓
+Core (Network, Persistence, Utilities)
+
+**📂 Project Structure
+**
+The project is organized using feature-based modularization:
 DailyRideApp
-│
 ├── App
-│   ├── DailyRideApp.swift
-│   ├── AppDelegate.swift
-│   ├── SceneDelegate.swift
-│   ├── AppCoordinator.swift
-│   └── AppContainer.swift
-│
 ├── Core
-│   ├── Network
-│   │   ├── NetworkService.swift
-│   │   ├── URLSessionNetworkService.swift
-│   │   ├── APIEndpoint.swift
-│   │   └── APIError.swift
-│   │
-│   ├── Persistence
-│   │   ├── CoreDataStack.swift
-│   │   ├── LocalCache.swift
-│   │   └── SecureStorage.swift
-│   │
-│   ├── Location
-│   │   ├── LocationManager.swift
-│   │   └── LocationPermissionHandler.swift
-│   │
-│   ├── Auth
-│   │   ├── AuthTokenProvider.swift
-│   │   └── AuthInterceptor.swift
-│   │
-│   ├── Utils
-│   │   ├── DateFormatter+Ext.swift
-│   │   ├── String+Ext.swift
-│   │   ├── Logger.swift
-│   │   └── Validators.swift
-│   │
-│   └── Constants
-│       ├── AppConstants.swift
-│       └── APIConstants.swift
-│
 ├── Domain
-│   ├── Entities
-│   │   ├── User.swift
-│   │   ├── Ride.swift
-│   │   ├── Message.swift
-│   │   └── Vehicle.swift
-│   │
-│   ├── UseCases
-│   │   ├── Auth
-│   │   │   ├── LoginUseCase.swift
-│   │   │   ├── SignUpUseCase.swift
-│   │   │   └── LogoutUseCase.swift
-│   │   │
-│   │   ├── Rides
-│   │   │   ├── SearchRidesUseCase.swift
-│   │   │   ├── PostRideUseCase.swift
-│   │   │   └── RideHistoryUseCase.swift
-│   │   │
-│   │   ├── Messages
-│   │   │   ├── SendMessageUseCase.swift
-│   │   │   └── ListenMessagesUseCase.swift
-│   │   │
-│   │   └── Profile
-│   │       ├── FetchProfileUseCase.swift
-│   │       └── UpdateProfileUseCase.swift
-│   │
-│   └── Repositories
-│       ├── AuthRepository.swift
-│       ├── RideRepository.swift
-│       ├── MessageRepository.swift
-│       └── ProfileRepository.swift
-│
 ├── Data
-│   ├── Repositories
-│   │   ├── AuthRepositoryImpl.swift
-│   │   ├── RideRepositoryImpl.swift
-│   │   ├── MessageRepositoryImpl.swift
-│   │   └── ProfileRepositoryImpl.swift
-│   │
-│   ├── DataSources
-│   │   ├── Remote
-│   │   │   ├── AuthAPI.swift
-│   │   │   ├── RideAPI.swift
-│   │   │   ├── MessageAPI.swift
-│   │   │   └── ProfileAPI.swift
-│   │   │
-│   │   └── Local
-│   │       ├── RideLocalDataSource.swift
-│   │       └── UserLocalDataSource.swift
-│   │
-│   └── DTOs
-│       ├── UserDTO.swift
-│       ├── RideDTO.swift
-│       └── MessageDTO.swift
-│
 ├── Features
 │   ├── Auth
-│   │   ├── Login
-│   │   │   ├── LoginView.swift
-│   │   │   ├── LoginViewModel.swift
-│   │   │   └── LoginCoordinator.swift
-│   │   │
-│   │   └── SignUp
-│   │       ├── SignUpView.swift
-│   │       ├── SignUpViewModel.swift
-│   │       └── SignUpCoordinator.swift
-│   │
 │   ├── Rides
-│   │   ├── SearchRides
-│   │   │   ├── SearchRidesView.swift
-│   │   │   ├── SearchRidesViewModel.swift
-│   │   │   └── SearchRidesCoordinator.swift
-│   │   │
-│   │   ├── PostRide
-│   │   │   ├── PostRideView.swift
-│   │   │   ├── PostRideViewModel.swift
-│   │   │   └── PostRideCoordinator.swift
-│   │   │
-│   │   └── RideHistory
-│   │       ├── RideHistoryView.swift
-│   │       ├── RideHistoryViewModel.swift
-│   │       └── RideHistoryCoordinator.swift
-│   │
 │   ├── Messages
-│   │   ├── MessagesListView.swift
-│   │   ├── MessagesViewModel.swift
-│   │   ├── ChatView.swift
-│   │   └── ChatViewModel.swift
-│   │
 │   └── Profile
-│       ├── ProfileView.swift
-│       ├── ProfileViewModel.swift
-│       ├── EditProfileView.swift
-│       └── EditProfileViewModel.swift
-│
 ├── UIComponents
-│   ├── Buttons
-│   │   └── PrimaryButton.swift
-│   │
-│   ├── TextFields
-│   │   └── AppTextField.swift
-│   │
-│   ├── Loaders
-│   │   └── LoadingView.swift
-│   │
-│   └── Alerts
-│       └── AppAlert.swift
-│
 ├── Resources
-│   ├── Assets.xcassets
-│   ├── Localizable.strings
-│   └── Info.plist
-│
-├── SupportingFiles
-│   ├── PreviewMocks
-│   │   ├── MockUsers.swift
-│   │   └── MockRides.swift
-│   │
-│   └── AppEnvironment.swift
-│
 └── Tests
-    ├── DomainTests
-    │   ├── LoginUseCaseTests.swift
-    │   └── SearchRidesUseCaseTests.swift
-    │
-    ├── ViewModelTests
-    │   ├── LoginViewModelTests.swift
-    │   └── SearchRidesViewModelTests.swift
-    │
-    └── UITests
-        ├── LoginFlowUITests.swift
-        └── PostRideFlowUITests.swift
+
+Each feature contains its own:
+Views
+ViewModels
+Coordinators (navigation)
+Business logic via UseCases
+
+**🧠 Key Design Decisions
+**
+SwiftUI for modern declarative UI
+MVVM for presentation logic
+Clean Architecture for long-term scalability
+Async/Await for concurrency
+Repository Pattern for data abstraction
+Coordinator Pattern for navigation
+Dependency Injection via AppContainer
+
+**🧪 Testing Strategy
+**
+The project includes:
+Unit Tests
+Domain UseCases
+ViewModels
+UI Tests
+Authentication flows
+Ride posting & search flows
+Tests
+├── DomainTests
+├── ViewModelTests
+└── UITests
+
+**🌐 Networking
+**
+
+Built on top of URLSession
+Centralized NetworkService
+Request/response handling via DTOs
+Error handling through domain-friendly errors
+
+**🔐 Security & Privacy
+**
+Token-based authentication
+Secure storage for sensitive data
+Designed for known rider pooling to improve safety
+
+
+**🚀 Getting Started
+**
+Requirements
+Xcode 15+
+iOS 16+
+Swift 5.9+
+Run the App
+Clone the repository
+git clone https://github.com/your-username/DailyRide.git
+Open DailyRide.xcodeproj
+Select a simulator or device
+Build & Run ▶️
+
+**🔮 Future Enhancements
+**
+Maps & live location tracking
+Ride ratings & reviews
+Push notifications
+Payments integration
+Swift Package modularization
+CI/CD with Jenkins & Fastlane
+
+👨‍💻 Author
+Bhupesh Kumar
+Senior iOS Developer
+Expertise in scalable iOS apps, Clean Architecture, CI/CD, OTT & real-time systems
+
+📄 License
+This project is for learning and demonstration purposes.
+Feel free to fork and extend.
