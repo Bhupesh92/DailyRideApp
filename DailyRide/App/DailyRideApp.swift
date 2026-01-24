@@ -6,11 +6,31 @@
 
 import SwiftUI
 
+/*
+ Its job is to:
+ Create the root AppContainer
+ Create the AppCoordinator
+ Start the app flow
+ Host the root SwiftUI view
+ */
+
 @main
 struct DailyRideApp: App {
+    
+    // MARK: - Core App Objects
+    
+    private let appContainer: AppContainer
+    private let appCoordinator: AppCoordinator
+
+    init() {
+        let container = AppContainer()
+        self.appContainer = container
+        self.appCoordinator = AppCoordinator(container: container)
+    }
+    // MARK: - Initialization
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            AppCoordinatorView(coordinator: appCoordinator)
         }
     }
 }
