@@ -27,6 +27,7 @@ struct DailyRideApp: App {
         self.appContainer = container
         self.appCoordinator = AppCoordinator(container: container)
     }
+    
     // MARK: - Initialization
     var body: some Scene {
         WindowGroup {

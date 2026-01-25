@@ -13,6 +13,8 @@ struct AppCoordinatorView: View {
     @ObservedObject var coordinator: AppCoordinator
 
     var body: some View {
-        coordinator.rootView
+        coordinator.rootView.task {
+             coordinator.start()
+        }
     }
 }

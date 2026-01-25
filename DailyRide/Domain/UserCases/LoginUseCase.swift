@@ -7,14 +7,8 @@
 
 import Foundation
 
-// Domain Model
-struct User {
-    let id: String
-    let name: String
-    let email: String
-}
-
 // Use Case
 protocol LoginUseCase {
     func execute(email: String, password: String) async throws -> User
 }
+

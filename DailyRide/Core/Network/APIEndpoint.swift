@@ -20,26 +20,21 @@ protocol APIEndpoint {
     var headers: [String: String]? { get }
 }
 
-
-
-enum RideEndpoint: APIEndpoint {
+enum AuthEndpoint: APIEndpoint {
     case login
-    case search
-    case post
+    case signUp
 
     var path: String {
         switch self {
         case .login: return "/auth/login"
-        case .search: return "/rides/search"
-        case .post: return "/rides"
+        case .signUp: return "/auth/signUP"
         }
     }
 
     var method: HTTPMethod {
         switch self {
         case .login: return .post
-        case .search: return .get
-        case .post: return .get
+        case .signUp: return .post
         }
     }
 
