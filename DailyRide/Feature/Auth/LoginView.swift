@@ -10,8 +10,16 @@ import SwiftUI
 struct LoginView: View {
     
     @StateObject private var viewModel: LoginViewModel
-    
+    private let onLoginSuccess: () -> Void
+    private let onSignUpTapped: () -> Void
 
+    init(viewModel: LoginViewModel,
+        onLoginSuccess: @escaping () -> Void,
+        onSignUpTapped: @escaping () -> Void) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+        self.onLoginSuccess = onLoginSuccess
+        self.onSignUpTapped = onSignUpTapped
+    }
     var body: some View {
             VStack(spacing: 24) {
                 TextField("Email", text: $viewModel.email).keyboardType(.emailAddress)
@@ -35,10 +43,20 @@ struct LoginView: View {
                         .font(.footnote)
                 }
                 
+                Button("Don’t have an account? Sign Up") {
+                    onSignUpTapped()
+                }
+                .font(.footnote)
+                
                 Spacer()
 
             }
             .padding()
+            .onChange(of: viewModel.isLoginSuccessful) { success in
+                if success {
+                    onLoginSuccess()
+                }
+            }
             .navigationTitle("Home")
     }
 }

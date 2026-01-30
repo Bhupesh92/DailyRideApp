@@ -23,16 +23,28 @@ final class AppCoordinator: ObservableObject {
         if isUserLoggedIn() {
            // showDashboard()
         } else {
-            showSignUp()
+            showLogin()
         }
     }
+    
+    func showLogin() {
+        let viewModel = LoginViewModel(
+            loginUseCase: container.loginUseCase
+        )
 
-    private func showLogin() {
-//        let viewModel = LoginViewModel(
-//            loginUseCase: container.loginUseCase
-//        )
-        // present LoginView
+        let view = LoginView(
+            viewModel: viewModel,
+            onLoginSuccess: { [weak self] in
+                //self?.showDashboard()
+            },
+            onSignUpTapped: { [weak self] in
+                self?.showSignUp()
+            }
+        )
+
+        rootView = AnyView(view)
     }
+
     
     func showSignUp() {
         let viewModel = SignUpViewModel(

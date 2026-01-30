@@ -37,5 +37,9 @@ final class AppContainer {
     lazy var signUpUseCase = SignUpUseCaseImpl(
         repository: authRepository
     )
+    
+    lazy var loginUseCase = LoginUseCaseImpl(
+        repository: authRepository
+    )
 }
 
