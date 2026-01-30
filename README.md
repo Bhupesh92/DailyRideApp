@@ -108,7 +108,7 @@ iOS 16+
 Swift 5.9+
 Run the App
 Clone the repository
-git clone https://github.com/your-username/DailyRide.git
+git clone https://github.com/bhupesh92/DailyRide.git
 Open DailyRide.xcodeproj
 Select a simulator or device
 Build & Run ▶️
