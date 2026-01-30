@@ -29,6 +29,16 @@
 		E51ACF282F224A7C00B5E6E4 /* DailyRideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyRideUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E5839B382F2C979D00245CAF /* Exceptions for "DailyRideUITests" folder in "DailyRide" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Helpers/AppEnvironment.swift,
+			);
+			target = E51ACF102F224A7A00B5E6E4 /* DailyRide */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E51ACF132F224A7A00B5E6E4 /* DailyRide */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -42,6 +52,9 @@
 		};
 		E51ACF2B2F224A7C00B5E6E4 /* DailyRideUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E5839B382F2C979D00245CAF /* Exceptions for "DailyRideUITests" folder in "DailyRide" target */,
+			);
 			path = DailyRideUITests;
 			sourceTree = "<group>";
 		};

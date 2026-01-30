@@ -24,14 +24,14 @@ struct LoginView: View {
             VStack(spacing: 24) {
                 TextField("Email", text: $viewModel.email).keyboardType(.emailAddress)
                     .autocapitalization(.none)
-                    .textFieldStyle(.roundedBorder)
-                SecureField("Password", text: $viewModel.password).textFieldStyle(.roundedBorder)
+                    .textFieldStyle(.roundedBorder).accessibilityIdentifier("login_email_textfield")
+                SecureField("Password", text: $viewModel.password).textFieldStyle(.roundedBorder).accessibilityIdentifier("login_password_textfield")
                 
                 Button("Login") {
                     Task {
                         await viewModel.login()
                     }
-                }
+                }.accessibilityIdentifier("login_button")
                 
                 if viewModel.isLoading {
                     ProgressView()
@@ -40,13 +40,13 @@ struct LoginView: View {
                 if let error = viewModel.error {
                     Text(error)
                         .foregroundColor(.red)
-                        .font(.footnote)
+                        .font(.footnote).accessibilityIdentifier("login_error_text")
                 }
                 
                 Button("Don’t have an account? Sign Up") {
                     onSignUpTapped()
                 }
-                .font(.footnote)
+                .font(.footnote).accessibilityIdentifier("signUp_Log_button")
                 
                 Spacer()
 

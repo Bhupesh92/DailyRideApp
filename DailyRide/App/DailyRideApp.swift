@@ -32,6 +32,11 @@ struct DailyRideApp: App {
     var body: some Scene {
         WindowGroup {
             AppCoordinatorView(coordinator: appCoordinator)
+                .onAppear {
+                    if CommandLine.arguments.contains("--ui-testing") {
+                        AppEnvironment.shared.configureForUITests()
+                    }
+                }
         }
     }
 }
