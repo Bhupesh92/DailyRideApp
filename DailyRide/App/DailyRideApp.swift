@@ -17,26 +17,14 @@ import SwiftUI
 @main
 struct DailyRideApp: App {
     
-    // MARK: - Core App Objects
-    
-    private let appContainer: AppContainer
-    private let appCoordinator: AppCoordinator
-
-    init() {
-        let container = AppContainer()
-        self.appContainer = container
-        self.appCoordinator = AppCoordinator(container: container)
-    }
-    
     // MARK: - Initialization
     var body: some Scene {
         WindowGroup {
-            AppCoordinatorView(coordinator: appCoordinator)
-                .onAppear {
-                    if CommandLine.arguments.contains("--ui-testing") {
-                        AppEnvironment.shared.configureForUITests()
-                    }
+            RootView().onAppear {
+                if CommandLine.arguments.contains("--ui-testing") {
+                    AppEnvironment.shared.configureForUITests()
                 }
+            }
         }
     }
 }

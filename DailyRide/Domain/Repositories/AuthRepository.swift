@@ -20,6 +20,6 @@ protocol AuthRepository {
         password: String
     ) async throws -> User
 
-    func logout()
+    func logout() async
     func isUserLoggedIn() -> Bool
 }

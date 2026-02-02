@@ -62,7 +62,7 @@ final class AuthRepositoryImpl: AuthRepository {
         return userDTO.toDomain()
     }
 
-    func logout() {
+    func logout() async {
     }
 
     func isUserLoggedIn() -> Bool {
