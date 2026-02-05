@@ -64,9 +64,19 @@ final class AuthRepositoryImpl: AuthRepository {
 
     func logout() async {
     }
-
-    func isUserLoggedIn() -> Bool {
-        return false
+    
+    func getCurrentUser() async throws -> User {
+        // Check if token exists in secure storage
+        guard let token = try? secureStorage.get(for: "auth_token") else {
+            throw APIError.unauthorized
+        }
+        
+        // Optionally, you can validate the token with the backend here
+        
+        // For simplicity, we'll just return a dummy user
+        return User(
+            id: "123",
+            name: "Persisted User",
+            email: "")
     }
-
 }

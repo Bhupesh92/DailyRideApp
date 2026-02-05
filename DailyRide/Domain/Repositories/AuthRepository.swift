@@ -21,5 +21,5 @@ protocol AuthRepository {
     ) async throws -> User
 
     func logout() async
-    func isUserLoggedIn() -> Bool
+    func getCurrentUser() async throws -> User
 }
