@@ -9,8 +9,9 @@
 import Foundation
 
 final class MockAuthRepository: AuthRepository {
-
+    
     var shouldThrowError = false
+    var didCallLogout = false
     var receivedEmail: String?
     var receivedPassword: String?
     
@@ -45,10 +46,18 @@ final class MockAuthRepository: AuthRepository {
     }
     
     func logout() {
-        
+        didCallLogout = true
     }
     
-    func isUserLoggedIn() -> Bool {
-        return true
+    func getCurrentUser() async throws -> DailyRide.User {
+        if shouldThrowError {
+            throw APIError.unauthorized
+        }
+
+        return User(
+            id: "1",
+            name: "Bhupesh Kumar",
+            email: "bhupesh@test.com"
+        )
     }
 }
