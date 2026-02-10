@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct ProfileCoordinator: View {
-
     let container: AppContainer
     let onLogout: () -> Void
 
