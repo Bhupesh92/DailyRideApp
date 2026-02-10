@@ -29,14 +29,15 @@ final class AuthRepositoryImpl: AuthRepository {
 
         let endpoint = AuthEndpoint.login
 
-        let userDTO: UserDTO = try await networkService.request(
-            endpoint: endpoint,
-            body: requestBody
-        )
+//        let userDTO: UserDTO = try await networkService.request(
+//            endpoint: endpoint,
+//            body: requestBody
+//        )
 
      //   persistSession(from: userDTO)
 
-        return userDTO.toDomain()
+        // return userDTO.toDomain()
+        return try await getCurrentUser()
     }
 
     func signUp(
@@ -67,9 +68,9 @@ final class AuthRepositoryImpl: AuthRepository {
     
     func getCurrentUser() async throws -> User {
         // Check if token exists in secure storage
-        guard let token = try? secureStorage.get(for: "auth_token") else {
-            throw APIError.unauthorized
-        }
+//        guard let token = try? secureStorage.get(for: "auth_token") else {
+//            throw APIError.unauthorized
+//        }
         
         // Optionally, you can validate the token with the backend here
         

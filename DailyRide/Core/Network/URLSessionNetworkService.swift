@@ -13,9 +13,7 @@ final class URLSessionNetworkService: NetworkService {
     private let session: URLSession
     private let authInterceptor: AuthInterceptor
 
-    init(
-        session: URLSession = .shared,
-        authInterceptor: AuthInterceptor = DefaultAuthInterceptor(
+    init(session: URLSession, authInterceptor: AuthInterceptor = DefaultAuthInterceptor(
             tokenProvider: DefaultAuthTokenProvider()
         )
     ) {
