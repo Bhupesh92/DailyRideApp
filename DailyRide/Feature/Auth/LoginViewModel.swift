@@ -23,10 +23,12 @@ final class LoginViewModel: ObservableObject {
 
     // MARK: - Dependency
     private let loginUseCase: LoginUseCase
+    private let biometricService: BiometricService
 
     // MARK: - Init
-    init(loginUseCase: LoginUseCase) {
+    init(loginUseCase: LoginUseCase, biometricService: BiometricService) {
         self.loginUseCase = loginUseCase
+        self.biometricService = biometricService
     }
 
     // MARK: - Action
@@ -42,6 +44,17 @@ final class LoginViewModel: ObservableObject {
             isLoginSuccessful = true
         } catch {
             self.error = error.localizedDescription
+        }
+    }
+    
+    func loginWithBiometric() async {
+        do {
+            let success = try await biometricService.authenticate()
+            if success {
+                // If valid token exists → navigate to home
+            }
+        } catch {
+//            throw "Biometric authentication failed" enum
         }
     }
 }
