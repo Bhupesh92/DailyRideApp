@@ -6,26 +6,14 @@
 //
 
 import Foundation
+import Security
 
 protocol SecureStorage {
-    func save(_ value: String, for key: String)
-    func get(for key: String) -> String?
-    func remove(for key: String)
+    func save(_ data: Data, for key: String) throws
+    func read(for key: String) throws -> Data?
+    func delete(for key: String) throws
 }
 
-final class KeychainStorage: SecureStorage {
-
-    private var storage: [String: String] = [:]
-
-    func save(_ value: String, for key: String) {
-        storage[key] = value
-    }
-
-    func get(for key: String) -> String? {
-        storage[key]
-    }
-
-    func remove(for key: String) {
-        storage.removeValue(forKey: key)
-    }
+protocol BiometricService {
+    func authenticate() async throws -> Bool
 }

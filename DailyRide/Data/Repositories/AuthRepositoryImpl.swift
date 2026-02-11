@@ -10,11 +10,11 @@ import Foundation
 final class AuthRepositoryImpl: AuthRepository {
     
     var networkService: NetworkService
-    var secureStorage: SecureStorage
+    var sessionManager: SessionManager
     
-    init(networkService: NetworkService, secureStorage: SecureStorage) {
+    init(networkService: NetworkService, sessionManager: SessionManager) {
         self.networkService = networkService
-        self.secureStorage = secureStorage
+        self.sessionManager = sessionManager
     }
 
     func login(
@@ -29,15 +29,47 @@ final class AuthRepositoryImpl: AuthRepository {
 
         let endpoint = AuthEndpoint.login
 
-//        let userDTO: UserDTO = try await networkService.request(
-//            endpoint: endpoint,
-//            body: requestBody
-//        )
+        let userDTO: UserDTO = try await networkService.request(
+            endpoint: endpoint,
+            body: requestBody
+        )
 
-     //   persistSession(from: userDTO)
+        let token = AuthToken(
+            accessToken: userDTO.auth_token ?? "",
+            refreshToken: userDTO.refresh_token  ?? "",
+            expiryDate: Date().addingTimeInterval(86400) // 24 hours
+        )
 
-        // return userDTO.toDomain()
-        return try await getCurrentUser()
+        try sessionManager.saveToken(token)
+        return userDTO.toDomain()
+    }
+    
+    func refreshToken() async throws -> String {
+        
+        guard let refreshToken = try sessionManager.getRefreshToken() else {
+            throw APIError.unauthorized
+        }
+        
+        let requestBody = try JSONEncoder().encode([
+            "refreshToken": refreshToken,
+        ])
+
+        let endpoint = AuthEndpoint.login
+
+        let userDTO: UserDTO = try await networkService.request(
+            endpoint: endpoint,
+            body: requestBody
+        )
+
+        let newToken = AuthToken(
+            accessToken: userDTO.auth_token ?? "",
+            refreshToken: userDTO.refresh_token ?? "",
+            expiryDate: Date().addingTimeInterval(86400)
+        )
+
+        try sessionManager.saveToken(newToken)
+        
+        return newToken.accessToken
     }
 
     func signUp(
@@ -58,12 +90,19 @@ final class AuthRepositoryImpl: AuthRepository {
             body: requestBody
         )
         
-       // persistSession(from: userDTO)
-        
+        let newToken = AuthToken(
+            accessToken: userDTO.auth_token ?? "",
+            refreshToken: userDTO.refresh_token ?? "",
+            expiryDate: Date().addingTimeInterval(86400)
+        )
+
+        try sessionManager.saveToken(newToken)
+                
         return userDTO.toDomain()
     }
 
-    func logout() async {
+    func logout() async throws {
+        try sessionManager.clearSession()
     }
     
     func getCurrentUser() async throws -> User {

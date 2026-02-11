@@ -12,6 +12,7 @@ struct UserDTO: Codable {
     let full_name: String
     let email_address: String
     let auth_token: String?
+    let refresh_token: String?
 }
 
 extension UserDTO {
