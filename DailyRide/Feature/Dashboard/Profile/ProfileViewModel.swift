@@ -36,6 +36,12 @@ final class ProfileViewModel: ObservableObject {
     }
 
     func logout() async {
-        await authRepository.logout()
+        do {
+            try await authRepository.logout()
+        }
+        catch {
+            print("Error in logout")
+        }
+        
     }
 }

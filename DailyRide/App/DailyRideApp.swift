@@ -24,6 +24,8 @@ struct DailyRideApp: App {
                 if CommandLine.arguments.contains("--ui-testing") {
                     AppEnvironment.shared.configureForUITests()
                 }
+            }.task {
+                SecurityBootstrapper.initialize()
             }
         }
     }

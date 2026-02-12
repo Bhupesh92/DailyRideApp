@@ -119,4 +119,5 @@ final class AuthRepositoryImpl: AuthRepository {
             name: "Persisted User",
             email: "")
     }
+    
 }
