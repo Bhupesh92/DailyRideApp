@@ -28,8 +28,8 @@ final class AppContainer {
         return URLSessionNetworkService(session: session)
     }()
 
-    lazy var secureStorage: SecureStorage = {
-        KeychainStorage()
+    lazy var sessionManager: SessionManager = {
+        SessionManager(storage: KeychainSecureStorage())
     }()
 
 
@@ -38,7 +38,7 @@ final class AppContainer {
     lazy var authRepository: AuthRepository = {
         AuthRepositoryImpl(
             networkService: networkService,
-            secureStorage: secureStorage
+            sessionManager: sessionManager
         )
     }()
 

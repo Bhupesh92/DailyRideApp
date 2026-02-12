@@ -27,11 +27,10 @@ extension UserDTO {
 
 extension User {
     func toDTO() -> UserDTO {
-        UserDTO(
-            id: id,
+        UserDTO(id: id,
             full_name: name,
             email_address: email,
-            auth_token: nil
-        )
+            auth_token: nil,
+            refresh_token: nil)
     }
 }

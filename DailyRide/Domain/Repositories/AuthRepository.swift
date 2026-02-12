@@ -20,6 +20,6 @@ protocol AuthRepository {
         password: String
     ) async throws -> User
 
-    func logout() async
+    func logout() async throws
     func getCurrentUser() async throws -> User
 }

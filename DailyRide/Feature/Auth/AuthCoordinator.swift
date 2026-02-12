@@ -14,7 +14,8 @@ struct AuthCoordinator: View {
 
     var body: some View {
         let viewModel = LoginViewModel(
-            loginUseCase: container.loginUseCase
+            loginUseCase: container.loginUseCase,
+            biometricService: BiometricServiceImpl()
         )
 
         LoginView(
