@@ -13,16 +13,16 @@ protocol AuthInterceptor {
 
 final class DefaultAuthInterceptor: AuthInterceptor {
 
-    private let tokenProvider: AuthTokenProvider
+    private let sessionManager: SessionManager
 
-    init(tokenProvider: AuthTokenProvider) {
-        self.tokenProvider = tokenProvider
+    init(sessionManager: SessionManager) {
+        self.sessionManager = sessionManager
     }
 
     func intercept(_ request: URLRequest) -> URLRequest {
         var request = request
         
-        if let token = tokenProvider.getToken() {
+        if let token = try? sessionManager.getValidAccessToken() {
             request.addValue(
                 "Bearer \(token)",
                 forHTTPHeaderField: "Authorization"

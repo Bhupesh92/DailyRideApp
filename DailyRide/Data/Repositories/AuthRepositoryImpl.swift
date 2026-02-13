@@ -22,26 +22,28 @@ final class AuthRepositoryImpl: AuthRepository {
         password: String
     ) async throws -> User {
         
-        let requestBody = try JSONEncoder().encode([
-            "email": email,
-            "password": password
-        ])
-
-        let endpoint = AuthEndpoint.login
-
-        let userDTO: UserDTO = try await networkService.request(
-            endpoint: endpoint,
-            body: requestBody
-        )
-
-        let token = AuthToken(
-            accessToken: userDTO.auth_token ?? "",
-            refreshToken: userDTO.refresh_token  ?? "",
-            expiryDate: Date().addingTimeInterval(86400) // 24 hours
-        )
-
-        try sessionManager.saveToken(token)
-        return userDTO.toDomain()
+        return User(id: "124", name: "Bhupesh", email: "Brx@gmail.com")
+        
+//        let requestBody = try JSONEncoder().encode([
+//            "email": email,
+//            "password": password
+//        ])
+//
+//        let endpoint = AuthEndpoint.login
+//
+//        let userDTO: UserDTO = try await networkService.request(
+//            endpoint: endpoint,
+//            body: requestBody
+//        )
+//
+//        let token = AuthToken(
+//            accessToken: userDTO.auth_token ?? "",
+//            refreshToken: userDTO.refresh_token  ?? "",
+//            expiryDate: Date().addingTimeInterval(86400) // 24 hours
+//        )
+//
+//        try sessionManager.saveToken(token)
+//        return userDTO.toDomain()
     }
     
     func refreshToken() async throws -> String {

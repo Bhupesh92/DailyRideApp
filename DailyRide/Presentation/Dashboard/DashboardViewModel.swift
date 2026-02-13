@@ -12,6 +12,7 @@ final class DashboardViewModel: ObservableObject {
 
     enum Destination {
         case profile
+        case search
     }
 
     @Published var destination: Destination?
@@ -23,5 +24,9 @@ final class DashboardViewModel: ObservableObject {
     
     func viewProfile() {
         destination = .profile
+    }
+    
+    func viewSearch() {
+        destination = .search
     }
 }
