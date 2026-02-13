@@ -17,7 +17,7 @@ final class LoginViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         mockUseCase = MockLoginUseCase()
-        viewModel = LoginViewModel(loginUseCase: mockUseCase)
+//        viewModel = LoginViewModel(loginUseCase: mockUseCase, biometricService: <#any BiometricService#>)
     }
 
     override func tearDown() {
