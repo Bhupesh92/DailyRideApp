@@ -13,10 +13,7 @@ final class URLSessionNetworkService: NetworkService {
     private let session: URLSession
     private let authInterceptor: AuthInterceptor
 
-    init(session: URLSession, authInterceptor: AuthInterceptor = DefaultAuthInterceptor(
-            tokenProvider: DefaultAuthTokenProvider()
-        )
-    ) {
+    init(session: URLSession, authInterceptor: AuthInterceptor) {
         self.session = session
         self.authInterceptor = authInterceptor
     }
@@ -48,6 +45,7 @@ final class URLSessionNetworkService: NetworkService {
             }
 
             switch httpResponse.statusCode {
+            // Response Interceptor needed
             case 200...299:
                 return try JSONDecoder().decode(T.self, from: data)
             case 401:

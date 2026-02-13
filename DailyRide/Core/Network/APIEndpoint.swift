@@ -23,11 +23,13 @@ protocol APIEndpoint {
 enum AuthEndpoint: APIEndpoint {
     case login
     case signUp
+    case search
 
     var path: String {
         switch self {
         case .login: return "/auth/login"
         case .signUp: return "/auth/signUP"
+        case .search: return "/search"
         }
     }
 
@@ -35,6 +37,7 @@ enum AuthEndpoint: APIEndpoint {
         switch self {
         case .login: return .post
         case .signUp: return .post
+        case .search: return .get
         }
     }
 

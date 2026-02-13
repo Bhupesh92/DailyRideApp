@@ -23,3 +23,14 @@ enum ValidationError: Error, LocalizedError {
         }
     }
 }
+
+enum SearchError: Error, LocalizedError {
+    case noSearch
+    
+    var errorDescription: String? {
+        switch self {
+        case .noSearch:
+            return "No result found."
+        }
+    }
+}

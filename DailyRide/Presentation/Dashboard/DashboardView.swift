@@ -40,6 +40,7 @@ struct DashboardView: View {
 
                 Button("Search Rides") {
                     // Navigate to Search feature
+                    viewModel.viewSearch()
                 }
 
                 Button("Post Ride") {
@@ -66,6 +67,8 @@ struct DashboardView: View {
                         container: container,
                         onLogout: onLogout
                     )
+                case .search:
+                    SearchCoordinator(container: container)
                 }
             }
             .onAppear {

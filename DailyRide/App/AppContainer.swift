@@ -25,26 +25,30 @@ final class AppContainer {
                                  delegate: securityManager,
                                  delegateQueue: nil)
 
-        return URLSessionNetworkService(session: session)
+        return URLSessionNetworkService(session: session,
+                                        authInterceptor: DefaultAuthInterceptor(
+            sessionManager: sessionManager
+            ))
     }()
 
     lazy var sessionManager: SessionManager = {
         SessionManager(storage: KeychainSecureStorage())
     }()
 
-
     // MARK: - Repositories
-    
     lazy var authRepository: AuthRepository = {
         AuthRepositoryImpl(
             networkService: networkService,
             sessionManager: sessionManager
         )
     }()
+    
+    lazy var searchRepository: SearchRepository = {
+        SearchRepositoryImpl(networkService: networkService)
+    }()
 
 
     // MARK: - Use Cases (Domain Layer)
-    
     // Auth
 
     lazy var signUpUseCase = SignUpUseCaseImpl(
@@ -53,6 +57,10 @@ final class AppContainer {
     
     lazy var loginUseCase = LoginUseCaseImpl(
         repository: authRepository
+    )
+    
+    lazy var searchUseCase = SearchUseCaseImpl(
+        repository: searchRepository
     )
 }
 
